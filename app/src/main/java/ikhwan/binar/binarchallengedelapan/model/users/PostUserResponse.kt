@@ -1,4 +1,4 @@
-package ikhwan.binar.binarchallengelima.model.users
+package ikhwan.binar.binarchallengedelapan.model.users
 
 import com.google.gson.annotations.SerializedName
 

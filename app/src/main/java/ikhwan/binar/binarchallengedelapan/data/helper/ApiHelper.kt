@@ -1,7 +1,7 @@
 package ikhwan.binar.binarchallengedelapan.data.helper
 
 import ikhwan.binar.binarchallengedelapan.data.networking.ApiService
-import ikhwan.binar.binarchallengelima.model.users.PostUserResponse
+import ikhwan.binar.binarchallengedelapan.model.users.PostUserResponse
 import javax.inject.Inject
 import javax.inject.Named
 

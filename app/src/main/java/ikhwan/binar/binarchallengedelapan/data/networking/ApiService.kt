@@ -1,10 +1,9 @@
 package ikhwan.binar.binarchallengedelapan.data.networking
 
-import ikhwan.binar.binarchallengelima.model.nowplaying.GetNowPlayingResponse
-import ikhwan.binar.binarchallengelima.model.popularmovie.GetPopularMovieResponse
-import ikhwan.binar.binarchallengelima.model.users.GetUserResponseItem
-import ikhwan.binar.binarchallengelima.model.users.PostUserResponse
-import retrofit2.Call
+import ikhwan.binar.binarchallengedelapan.model.nowplaying.GetNowPlayingResponse
+import ikhwan.binar.binarchallengedelapan.model.popularmovie.GetPopularMovieResponse
+import ikhwan.binar.binarchallengedelapan.model.users.GetUserResponseItem
+import ikhwan.binar.binarchallengedelapan.model.users.PostUserResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST

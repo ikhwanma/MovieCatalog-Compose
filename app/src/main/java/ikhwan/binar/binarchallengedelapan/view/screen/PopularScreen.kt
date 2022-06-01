@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ikhwan.binar.binarchallengedelapan.view.component.MovieItem
 import ikhwan.binar.binarchallengedelapan.view.ui.theme.MidnightBlueVariant
-import ikhwan.binar.binarchallengelima.model.popularmovie.ResultMovie
+import ikhwan.binar.binarchallengedelapan.model.popularmovie.ResultMovie
 
 @ExperimentalFoundationApi
 @Composable

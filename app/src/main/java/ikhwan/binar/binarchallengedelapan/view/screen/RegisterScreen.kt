@@ -35,14 +35,13 @@ import ikhwan.binar.binarchallengedelapan.view.ui.theme.MidnightBlue
 import ikhwan.binar.binarchallengedelapan.view.ui.theme.TopOnlyCorner
 import ikhwan.binar.binarchallengedelapan.viewmodel.ViewModelState
 import ikhwan.binar.binarchallengedelapan.viewmodel.ViewModelUser
-import ikhwan.binar.binarchallengelima.model.users.PostUserResponse
+import ikhwan.binar.binarchallengedelapan.model.users.PostUserResponse
 import java.util.regex.Pattern
 
 @ExperimentalFoundationApi
 @Composable
 fun RegisterScreen(viewModelUser: ViewModelUser, viewModelState: ViewModelState) {
     val context = LocalContext.current
-
 
     val username = viewModelState.username
     val email = viewModelState.email
@@ -72,9 +71,9 @@ fun RegisterScreen(viewModelUser: ViewModelUser, viewModelState: ViewModelState)
             verticalArrangement = Arrangement.Top
         ) {
             Image(
-                painter = painterResource(id = R.drawable.ic_img_logo),
+                painter = painterResource(id = R.drawable.img_tmdb),
                 contentDescription = "App Logo",
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f).width(185.dp).height(133.dp)
             )
             Card(
                 modifier = Modifier

@@ -8,7 +8,7 @@ import androidx.navigation.compose.composable
 import ikhwan.binar.binarchallengedelapan.view.screen.NowPlaying
 import ikhwan.binar.binarchallengedelapan.view.screen.PopularScreen
 import ikhwan.binar.binarchallengedelapan.view.screen.ProfileScreen
-import ikhwan.binar.binarchallengelima.model.popularmovie.ResultMovie
+import ikhwan.binar.binarchallengedelapan.model.popularmovie.ResultMovie
 
 @ExperimentalFoundationApi
 @Composable

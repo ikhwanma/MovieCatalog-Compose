@@ -52,9 +52,9 @@ fun LoginScreen(viewModel: ViewModelUser, viewModelState: ViewModelState) {
         ) {
 
             Image(
-                painter = painterResource(id = R.drawable.ic_img_logo),
+                painter = painterResource(id = R.drawable.img_tmdb),
                 contentDescription = "App Logo",
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f).width(185.dp).height(133.dp)
             )
             Card(
                 modifier = Modifier
@@ -122,18 +122,17 @@ fun LoginScreen(viewModel: ViewModelUser, viewModelState: ViewModelState) {
                     Spacer(modifier = Modifier.height(10.dp))
 
                     ButtonMovieApp(text = "Log In") {
-                        context.startActivity(
-                            Intent(
-                                context,
-                                HomeActivity::class.java
-                            )
-                        )
                         val data = viewModel.getUserResponse
                         if (data.isNotEmpty()) {
                             val user = data[0]
                             if (viewModelState.email == user.email) {
                                 if (password == user.password) {
-
+                                    context.startActivity(
+                                        Intent(
+                                            context,
+                                            HomeActivity::class.java
+                                        )
+                                    )
                                 } else {
                                     Toast.makeText(
                                         context,

@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ikhwan.binar.binarchallengedelapan.data.utils.MainRepository
-import ikhwan.binar.binarchallengelima.model.popularmovie.ResultMovie
+import ikhwan.binar.binarchallengedelapan.model.popularmovie.ResultMovie
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

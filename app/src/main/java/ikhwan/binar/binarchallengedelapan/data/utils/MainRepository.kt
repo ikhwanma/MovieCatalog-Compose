@@ -1,7 +1,7 @@
 package ikhwan.binar.binarchallengedelapan.data.utils
 
 import ikhwan.binar.binarchallengedelapan.data.helper.ApiHelper
-import ikhwan.binar.binarchallengelima.model.users.PostUserResponse
+import ikhwan.binar.binarchallengedelapan.model.users.PostUserResponse
 import javax.inject.Inject
 
 class MainRepository @Inject constructor(private val apiHelper: ApiHelper) {

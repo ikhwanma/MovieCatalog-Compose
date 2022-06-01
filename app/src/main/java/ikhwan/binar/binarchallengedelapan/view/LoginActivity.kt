@@ -7,9 +7,7 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import dagger.hilt.android.AndroidEntryPoint
 import ikhwan.binar.binarchallengedelapan.view.screen.LoginScreen
 import ikhwan.binar.binarchallengedelapan.view.ui.theme.BinarChallengeDelapanTheme
@@ -39,14 +37,6 @@ class LoginActivity : ComponentActivity() {
     }
 }
 
-
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun DefaultPreview() {
-    BinarChallengeDelapanTheme {
-
-    }
-}
 
 
 

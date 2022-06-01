@@ -13,8 +13,6 @@ class ViewModelState : ViewModel() {
     var passVisibility by mutableStateOf(false)
     var konfPassVisibility by mutableStateOf(false)
 
-    var homeScreen by mutableStateOf("popular")
-
     fun onVisibilityChanged(newBoolean: Boolean) {
         passVisibility = newBoolean
     }
@@ -37,10 +35,5 @@ class ViewModelState : ViewModel() {
     fun onUsernameChanged(newString: String){
         username = newString
     }
-
-    fun onHomeScreenChanged(newString: String) {
-        homeScreen = newString
-    }
-
 
 }
