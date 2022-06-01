@@ -1,10 +1,14 @@
 package ikhwan.binar.binarchallengedelapan.view.screen
 
+import android.content.Intent
 import android.util.Log
 import android.widget.Toast
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
@@ -24,25 +28,28 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ikhwan.binar.binarchallengedelapan.R
+import ikhwan.binar.binarchallengedelapan.view.LoginActivity
 import ikhwan.binar.binarchallengedelapan.view.component.ButtonMovieApp
 import ikhwan.binar.binarchallengedelapan.view.component.TextFieldsMovieApp
 import ikhwan.binar.binarchallengedelapan.view.ui.theme.MidnightBlue
 import ikhwan.binar.binarchallengedelapan.view.ui.theme.TopOnlyCorner
-import ikhwan.binar.binarchallengedelapan.viewmodel.StateViewModel
+import ikhwan.binar.binarchallengedelapan.viewmodel.ViewModelState
 import ikhwan.binar.binarchallengedelapan.viewmodel.ViewModelUser
+import ikhwan.binar.binarchallengelima.model.users.PostUserResponse
 import java.util.regex.Pattern
 
+@ExperimentalFoundationApi
 @Composable
-fun RegisterScreen(viewModelUser: ViewModelUser, stateViewModel: StateViewModel) {
+fun RegisterScreen(viewModelUser: ViewModelUser, viewModelState: ViewModelState) {
     val context = LocalContext.current
 
 
-    val username = stateViewModel.username
-    val email = stateViewModel.email
-    val password = stateViewModel.password
-    val konfPassword = stateViewModel.konfPassword
-    val passVisibility = stateViewModel.passVisibility
-    val konfPassVisibility = stateViewModel.konfPassVisibility
+    val username = viewModelState.username
+    val email = viewModelState.email
+    val password = viewModelState.password
+    val konfPassword = viewModelState.konfPassword
+    val passVisibility = viewModelState.passVisibility
+    val konfPassVisibility = viewModelState.konfPassVisibility
 
     var isUsername: Boolean by remember {
         mutableStateOf(true)
@@ -59,11 +66,11 @@ fun RegisterScreen(viewModelUser: ViewModelUser, stateViewModel: StateViewModel)
 
     Scaffold(backgroundColor = MaterialTheme.colors.primary) {
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
-
             Image(
                 painter = painterResource(id = R.drawable.ic_img_logo),
                 contentDescription = "App Logo",
@@ -77,8 +84,10 @@ fun RegisterScreen(viewModelUser: ViewModelUser, stateViewModel: StateViewModel)
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(32.dp)
+                        .padding(horizontal = 32.dp)
+                        .verticalScroll(rememberScrollState())
                 ) {
+                    Spacer(modifier = Modifier.height(32.dp))
                     Text(
                         text = "Register",
                         fontWeight = FontWeight.ExtraBold,
@@ -94,7 +103,7 @@ fun RegisterScreen(viewModelUser: ViewModelUser, stateViewModel: StateViewModel)
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text, imeAction = ImeAction.Next),
                         onValueChange = {
                             isUsername = it.length >= 3
-                            stateViewModel.onUsernameChanged(it)
+                            viewModelState.onUsernameChanged(it)
                         },
                         colors = TextFieldDefaults.outlinedTextFieldColors(
                             focusedBorderColor = MidnightBlue,
@@ -102,7 +111,7 @@ fun RegisterScreen(viewModelUser: ViewModelUser, stateViewModel: StateViewModel)
                         )
                     ) {
                         IconButton(onClick = {
-                            stateViewModel.onUsernameChanged("")
+                            viewModelState.onUsernameChanged("")
                         }) {
                             Icon(
                                 imageVector = Icons.Filled.Clear,
@@ -123,11 +132,11 @@ fun RegisterScreen(viewModelUser: ViewModelUser, stateViewModel: StateViewModel)
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Next),
                         onValueChange = {
                             isEmail = isValidEmail(it)
-                            stateViewModel.onEmailChanged(it)
+                            viewModelState.onEmailChanged(it)
                         }
                     ) {
                         IconButton(onClick = {
-                            stateViewModel.onEmailChanged("")
+                            viewModelState.onEmailChanged("")
                         }) {
                             Icon(
                                 imageVector = Icons.Filled.Clear,
@@ -151,11 +160,11 @@ fun RegisterScreen(viewModelUser: ViewModelUser, stateViewModel: StateViewModel)
                         onValueChange = {
                             isPassword = it.length >= 6
                             isKonfPass = it == konfPassword
-                            stateViewModel.onPasswordChanged(it)
+                            viewModelState.onPasswordChanged(it)
                         },
                         trailingIcon = {
                             IconButton(onClick = {
-                                stateViewModel.onVisibilityChanged(!passVisibility)
+                                viewModelState.onVisibilityChanged(!passVisibility)
                             }) {
                                 Icon(
                                     imageVector = if (passVisibility) Icons.Default.Visibility
@@ -180,11 +189,11 @@ fun RegisterScreen(viewModelUser: ViewModelUser, stateViewModel: StateViewModel)
                         else PasswordVisualTransformation(),
                         onValueChange = {
                             isKonfPass = it == password
-                            stateViewModel.onKonfPasswordChanged(it)
+                            viewModelState.onKonfPasswordChanged(it)
                         },
                         trailingIcon = {
                             IconButton(onClick = {
-                                stateViewModel.onKonfVisibilityChanged(!konfPassVisibility)
+                                viewModelState.onKonfVisibilityChanged(!konfPassVisibility)
                             }) {
                                 Icon(
                                     imageVector = if (konfPassVisibility) Icons.Default.Visibility
@@ -212,9 +221,12 @@ fun RegisterScreen(viewModelUser: ViewModelUser, stateViewModel: StateViewModel)
                                 }
                             }
                             if (check){
-                                Toast.makeText(context, "Berhasil", Toast.LENGTH_SHORT).show()
+                                val user = PostUserResponse("", "", email, "", password, username)
+
+                                viewModelUser.registerUser(user)
+                                context.startActivity(Intent(context, LoginActivity::class.java))
                             }else{
-                                Toast.makeText(context, "Gagal", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(context, "Email has used by another user", Toast.LENGTH_SHORT).show()
                             }
                         }
                     }

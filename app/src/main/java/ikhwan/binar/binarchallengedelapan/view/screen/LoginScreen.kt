@@ -32,17 +32,17 @@ import ikhwan.binar.binarchallengedelapan.view.component.TextButtonMovieApp
 import ikhwan.binar.binarchallengedelapan.view.component.TextFieldsMovieApp
 import ikhwan.binar.binarchallengedelapan.view.ui.theme.MidnightBlue
 import ikhwan.binar.binarchallengedelapan.view.ui.theme.TopOnlyCorner
-import ikhwan.binar.binarchallengedelapan.viewmodel.StateViewModel
+import ikhwan.binar.binarchallengedelapan.viewmodel.ViewModelState
 import ikhwan.binar.binarchallengedelapan.viewmodel.ViewModelUser
 
 @ExperimentalFoundationApi
 @Composable
-fun LoginScreen(viewModel: ViewModelUser, stateViewModel: StateViewModel) {
+fun LoginScreen(viewModel: ViewModelUser, viewModelState: ViewModelState) {
     val context = LocalContext.current
 
-    val email = stateViewModel.email
-    val password = stateViewModel.password
-    val passVisibility = stateViewModel.passVisibility
+    val email = viewModelState.email
+    val password = viewModelState.password
+    val passVisibility = viewModelState.passVisibility
 
     Scaffold(backgroundColor = MaterialTheme.colors.primary) {
         Column(
@@ -80,11 +80,11 @@ fun LoginScreen(viewModel: ViewModelUser, stateViewModel: StateViewModel) {
                         label = "Email",
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                         onValueChange = {
-                            stateViewModel.onEmailChanged(it)
+                            viewModelState.onEmailChanged(it)
                         }
                     ) {
                         IconButton(onClick = {
-                            stateViewModel.onEmailChanged("")
+                            viewModelState.onEmailChanged("")
                         }) {
                             Icon(
                                 imageVector = Icons.Filled.Clear,
@@ -103,11 +103,11 @@ fun LoginScreen(viewModel: ViewModelUser, stateViewModel: StateViewModel) {
                         visualTransformation = if (passVisibility) VisualTransformation.None
                         else PasswordVisualTransformation(),
                         onValueChange = {
-                            stateViewModel.onPasswordChanged(it)
+                            viewModelState.onPasswordChanged(it)
                         },
                         trailingIcon = {
                             IconButton(onClick = {
-                                stateViewModel.onVisibilityChanged(!passVisibility)
+                                viewModelState.onVisibilityChanged(!passVisibility)
                             }) {
                                 Icon(
                                     imageVector = if (passVisibility) Icons.Default.Visibility
@@ -131,7 +131,7 @@ fun LoginScreen(viewModel: ViewModelUser, stateViewModel: StateViewModel) {
                         val data = viewModel.getUserResponse
                         if (data.isNotEmpty()) {
                             val user = data[0]
-                            if (stateViewModel.email == user.email) {
+                            if (viewModelState.email == user.email) {
                                 if (password == user.password) {
 
                                 } else {
