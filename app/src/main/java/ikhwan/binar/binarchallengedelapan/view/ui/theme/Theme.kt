@@ -1,4 +1,4 @@
-package ikhwan.binar.binarchallengedelapan.ui.theme
+package ikhwan.binar.binarchallengedelapan.view.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme

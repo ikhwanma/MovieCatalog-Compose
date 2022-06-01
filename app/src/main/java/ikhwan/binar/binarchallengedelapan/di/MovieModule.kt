@@ -15,6 +15,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object MovieModule {
+    private const val BASE_URL = "https://api.themoviedb.org/"
     private const val BASE_USER_URL = "https://625a859b43fda1299a186b77.mockapi.io/themovie/"
 
     private val logging : HttpLoggingInterceptor
@@ -32,6 +33,18 @@ object MovieModule {
     fun providesRetrofitUser(): ApiService {
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_USER_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
+            .build()
+        return retrofit.create(ApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    @Named("Movie")
+    fun providesInstanceMovie(): ApiService {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()

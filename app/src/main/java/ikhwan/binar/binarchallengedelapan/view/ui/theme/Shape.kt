@@ -1,4 +1,4 @@
-package ikhwan.binar.binarchallengedelapan.ui.theme
+package ikhwan.binar.binarchallengedelapan.view.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

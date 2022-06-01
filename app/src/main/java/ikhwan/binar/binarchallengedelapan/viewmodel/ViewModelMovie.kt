@@ -3,22 +3,27 @@ package ikhwan.binar.binarchallengedelapan.viewmodel
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ikhwan.binar.binarchallengedelapan.data.utils.MainRepository
+import ikhwan.binar.binarchallengelima.model.popularmovie.GetPopularMovieResponse
+import ikhwan.binar.binarchallengelima.model.popularmovie.ResultMovie
 import ikhwan.binar.binarchallengelima.model.users.GetUserResponseItem
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+
 @HiltViewModel
-class ViewModelUser @Inject constructor(private val mainRepository: MainRepository) : ViewModel(){
+class ViewModelMovie @Inject constructor(private val mainRepository: MainRepository) : ViewModel(){
 
-    var getUserResponse: List<GetUserResponseItem> by mutableStateOf(listOf())
+    var getPopularResponse: List<ResultMovie> by mutableStateOf(listOf())
 
-    fun getUser(email: String) {
+    fun getPopularMovie(apiKey : String) {
         viewModelScope.launch {
-            getUserResponse = mainRepository.getUser(email)
+            val listPopular = mainRepository.getPopularMovie(apiKey)
+            getPopularResponse = listPopular.resultMovies
         }
     }
 }
