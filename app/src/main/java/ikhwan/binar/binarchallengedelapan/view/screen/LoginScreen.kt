@@ -127,12 +127,14 @@ fun LoginScreen(viewModel: ViewModelUser, viewModelState: ViewModelState) {
                             val user = data[0]
                             if (viewModelState.email == user.email) {
                                 if (password == user.password) {
+                                    viewModel.setEmail(user.id)
                                     context.startActivity(
                                         Intent(
                                             context,
                                             HomeActivity::class.java
                                         )
                                     )
+                                    context.act
                                 } else {
                                     Toast.makeText(
                                         context,

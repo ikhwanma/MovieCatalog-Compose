@@ -7,7 +7,7 @@ data class GetPopularMovieResponse(
     @SerializedName("page")
     val page: Int,
     @SerializedName("results")
-    val resultMovies: List<ResultMovie>,
+    val results: List<Result>,
     @SerializedName("total_pages")
     val totalPages: Int,
     @SerializedName("total_results")

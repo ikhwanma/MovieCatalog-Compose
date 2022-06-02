@@ -8,27 +8,30 @@ import androidx.navigation.compose.composable
 import ikhwan.binar.binarchallengedelapan.view.screen.NowPlaying
 import ikhwan.binar.binarchallengedelapan.view.screen.PopularScreen
 import ikhwan.binar.binarchallengedelapan.view.screen.ProfileScreen
-import ikhwan.binar.binarchallengedelapan.model.popularmovie.ResultMovie
+import ikhwan.binar.binarchallengedelapan.model.popularmovie.Result
+import ikhwan.binar.binarchallengedelapan.viewmodel.ViewModelState
 
 @ExperimentalFoundationApi
 @Composable
 fun BottomNavGraph(
     navController: NavHostController,
-    listMovie : List<ResultMovie>,
-    listNowPlaying : List<ResultMovie>
+    listMovie : List<Result>,
+    listNowPlaying : List<Result>,
+    name: String,
+    viewModelState: ViewModelState
 ) {
     NavHost(
         navController = navController,
         startDestination = BottomBarScreen.Popular.route
     ) {
         composable(route = BottomBarScreen.Popular.route) {
-            PopularScreen(listMovie = listMovie)
+            PopularScreen(listMovie = listMovie, name)
         }
         composable(route = BottomBarScreen.NowPlaying.route) {
-            NowPlaying(listMovie = listNowPlaying)
+            NowPlaying(listMovie = listNowPlaying, name)
         }
         composable(route = BottomBarScreen.Profile.route) {
-            ProfileScreen()
+            ProfileScreen(viewModelState = viewModelState)
         }
     }
 }

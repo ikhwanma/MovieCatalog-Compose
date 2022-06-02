@@ -2,7 +2,7 @@ package ikhwan.binar.binarchallengedelapan.model.popularmovie
 
 import com.google.gson.annotations.SerializedName
 
-data class ResultMovie(
+data class Result(
     @SerializedName("adult")
     val adult: Boolean,
     @SerializedName("backdrop_path")

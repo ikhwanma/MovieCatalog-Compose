@@ -12,27 +12,32 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ikhwan.binar.binarchallengedelapan.view.component.MovieItem
 import ikhwan.binar.binarchallengedelapan.view.ui.theme.MidnightBlueVariant
-import ikhwan.binar.binarchallengedelapan.model.popularmovie.ResultMovie
+import ikhwan.binar.binarchallengedelapan.model.popularmovie.Result
+import java.util.*
 
 @ExperimentalFoundationApi
 @Composable
-fun NowPlaying(listMovie: List<ResultMovie>) {
+fun NowPlaying(listMovie: List<Result>, name: String) {
     Column(
-        modifier = Modifier.fillMaxSize().padding(vertical = 20.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(vertical = 20.dp),
         verticalArrangement = Arrangement.Top
     ) {
         Text(
-            text = "Welcome, Ikhwan!",
+            text = "Welcome, ${name.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }}!",
             color = Color.White,
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(start = 30.dp, bottom = 10.dp)
         )
         Card(

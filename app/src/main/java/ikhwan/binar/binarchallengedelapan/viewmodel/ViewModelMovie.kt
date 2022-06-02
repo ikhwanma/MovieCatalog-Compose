@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ikhwan.binar.binarchallengedelapan.data.utils.MainRepository
-import ikhwan.binar.binarchallengedelapan.model.popularmovie.ResultMovie
+import ikhwan.binar.binarchallengedelapan.model.popularmovie.Result
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -15,13 +15,13 @@ import javax.inject.Inject
 @HiltViewModel
 class ViewModelMovie @Inject constructor(private val mainRepository: MainRepository) : ViewModel(){
 
-    var getPopularResponse: List<ResultMovie> by mutableStateOf(listOf())
-    var getNowPlayingResponse: List<ResultMovie> by mutableStateOf(listOf())
+    var getPopularResponse: List<Result> by mutableStateOf(listOf())
+    var getNowPlayingResponse: List<Result> by mutableStateOf(listOf())
 
     fun getPopularMovie(apiKey : String) {
         viewModelScope.launch {
             val listPopular = mainRepository.getPopularMovie(apiKey)
-            getPopularResponse = listPopular.resultMovies
+            getPopularResponse = listPopular.results
         }
     }
 

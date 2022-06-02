@@ -1,6 +1,7 @@
 package ikhwan.binar.binarchallengedelapan.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -10,6 +11,7 @@ import androidx.compose.material.*
 import androidx.compose.ui.Modifier
 import dagger.hilt.android.AndroidEntryPoint
 import ikhwan.binar.binarchallengedelapan.BuildConfig
+
 import ikhwan.binar.binarchallengedelapan.view.screen.HomeScreen
 import ikhwan.binar.binarchallengedelapan.view.ui.theme.BinarChallengeDelapanTheme
 import ikhwan.binar.binarchallengedelapan.viewmodel.ViewModelMovie
@@ -33,8 +35,11 @@ class HomeActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     val apiKey = BuildConfig.TMDB_KEY
+                    viewModelUser.getEmail().observe(this){
+                        viewModelUser.setEmailState(it)
+                    }
 
-                    HomeScreen(viewModelMovie, viewModelUser, viewModelState, apiKey)
+                    HomeScreen(viewModelMovie, viewModelUser, viewModelState, apiKey, viewModelUser.getEmailState)
 
                 }
             }

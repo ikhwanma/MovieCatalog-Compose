@@ -1,5 +1,6 @@
 package ikhwan.binar.binarchallengedelapan.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -32,6 +33,13 @@ class LoginActivity : ComponentActivity() {
                     viewModelUser.getUser(viewModelState.email)
                     LoginScreen(viewModelUser, viewModelState)
                 }
+            }
+        }
+
+        viewModelUser.getEmail().observe(this){
+            if (it != ""){
+                startActivity(Intent(this, HomeActivity::class.java))
+                finish()
             }
         }
     }

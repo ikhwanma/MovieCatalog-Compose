@@ -4,10 +4,7 @@ import ikhwan.binar.binarchallengedelapan.model.nowplaying.GetNowPlayingResponse
 import ikhwan.binar.binarchallengedelapan.model.popularmovie.GetPopularMovieResponse
 import ikhwan.binar.binarchallengedelapan.model.users.GetUserResponseItem
 import ikhwan.binar.binarchallengedelapan.model.users.PostUserResponse
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface ApiService {
 
@@ -27,6 +24,11 @@ interface ApiService {
     suspend fun getUser(
         @Query("email") email: String
     ) : List<GetUserResponseItem>
+
+    @GET("/users/{id}")
+    suspend fun getUserId(
+        @Path("id") id: String
+    ) : GetUserResponseItem
 
     @POST("/users")
     suspend fun addUsers(

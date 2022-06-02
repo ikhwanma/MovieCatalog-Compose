@@ -1,8 +1,10 @@
 package ikhwan.binar.binarchallengedelapan.view.navigationcompose
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.LocalMovies
 import androidx.compose.material.icons.filled.Movie
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Tv
 import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class BottomBarScreen(
@@ -11,15 +13,15 @@ sealed class BottomBarScreen(
     val icon: ImageVector
 ){
     object Popular: BottomBarScreen(
-        route = "popular",
+        route = "Popular",
         title = "Popular",
         icon = Icons.Default.Movie
     )
 
     object NowPlaying: BottomBarScreen(
-        route = "now",
+        route = "now playing",
         title = "Now Playing",
-        icon = Icons.Default.Movie
+        icon = Icons.Default.LocalMovies
     )
 
     object Profile: BottomBarScreen(

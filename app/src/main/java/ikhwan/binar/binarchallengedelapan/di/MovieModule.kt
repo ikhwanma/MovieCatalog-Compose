@@ -1,9 +1,12 @@
 package ikhwan.binar.binarchallengedelapan.di
 
+import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import ikhwan.binar.binarchallengedelapan.data.datastore.DataStoreManager
 import ikhwan.binar.binarchallengedelapan.data.networking.ApiService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -50,4 +53,8 @@ object MovieModule {
             .build()
         return retrofit.create(ApiService::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun providesPref(@ApplicationContext appContext: Context) : DataStoreManager =  DataStoreManager(appContext)
 }

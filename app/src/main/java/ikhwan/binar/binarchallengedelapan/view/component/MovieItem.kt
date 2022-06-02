@@ -1,6 +1,8 @@
 package ikhwan.binar.binarchallengedelapan.view.component
 
+import android.content.Intent
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -10,16 +12,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import ikhwan.binar.binarchallengedelapan.view.ui.theme.*
-import ikhwan.binar.binarchallengedelapan.model.popularmovie.ResultMovie
+import ikhwan.binar.binarchallengedelapan.model.popularmovie.Result
+import ikhwan.binar.binarchallengedelapan.view.DetailActivity
 
 @Composable
-fun MovieItem(movie: ResultMovie) {
+fun MovieItem(movie: Result) {
+    val context = LocalContext.current
     val baseUrlImg = "https://image.tmdb.org/t/p/w500/"
     val urlImage = baseUrlImg + movie.posterPath
 
@@ -46,12 +51,14 @@ fun MovieItem(movie: ResultMovie) {
     ) {
         Card(
             modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(),
+                .fillMaxSize()
+                .clickable {
+                    context.startActivity(Intent(context, DetailActivity::class.java))
+                },
             shape = RoundedCornerShape(10.dp),
             elevation = 5.dp
         ) {
-            Column{
+            Column {
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -82,7 +89,10 @@ fun MovieItem(movie: ResultMovie) {
                             Column(
                                 verticalArrangement = Arrangement.Center,
                                 horizontalAlignment = Alignment.CenterHorizontally,
-                                modifier = Modifier.fillMaxWidth().fillMaxHeight().padding(7.dp)
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .fillMaxHeight()
+                                    .padding(7.dp)
                             ) {
                                 Text(
                                     text = rating.toString(),
