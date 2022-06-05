@@ -10,6 +10,7 @@ import ikhwan.binar.binarchallengedelapan.view.screen.PopularScreen
 import ikhwan.binar.binarchallengedelapan.view.screen.ProfileScreen
 import ikhwan.binar.binarchallengedelapan.model.popularmovie.Result
 import ikhwan.binar.binarchallengedelapan.viewmodel.ViewModelState
+import ikhwan.binar.binarchallengedelapan.viewmodel.ViewModelUser
 
 @ExperimentalFoundationApi
 @Composable
@@ -18,7 +19,8 @@ fun BottomNavGraph(
     listMovie : List<Result>,
     listNowPlaying : List<Result>,
     name: String,
-    viewModelState: ViewModelState
+    viewModelState: ViewModelState,
+    viewModelUser : ViewModelUser
 ) {
     NavHost(
         navController = navController,
@@ -31,7 +33,7 @@ fun BottomNavGraph(
             NowPlaying(listMovie = listNowPlaying, name)
         }
         composable(route = BottomBarScreen.Profile.route) {
-            ProfileScreen(viewModelState = viewModelState)
+            ProfileScreen(viewModelState = viewModelState, viewModelUser = viewModelUser)
         }
     }
 }

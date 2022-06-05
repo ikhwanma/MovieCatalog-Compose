@@ -25,7 +25,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ikhwan.binar.binarchallengedelapan.R
-import ikhwan.binar.binarchallengedelapan.view.HomeActivity
+import ikhwan.binar.binarchallengedelapan.model.users.GetUserResponseItem
 import ikhwan.binar.binarchallengedelapan.view.RegisterActivity
 import ikhwan.binar.binarchallengedelapan.view.component.ButtonMovieApp
 import ikhwan.binar.binarchallengedelapan.view.component.TextButtonMovieApp
@@ -37,12 +37,20 @@ import ikhwan.binar.binarchallengedelapan.viewmodel.ViewModelUser
 
 @ExperimentalFoundationApi
 @Composable
-fun LoginScreen(viewModel: ViewModelUser, viewModelState: ViewModelState) {
+fun LoginScreen(
+    viewModel: ViewModelUser,
+    viewModelState: ViewModelState,
+    listUser: MutableList<GetUserResponseItem>
+) {
     val context = LocalContext.current
 
     val email = viewModelState.email
     val password = viewModelState.password
     val passVisibility = viewModelState.passVisibility
+
+    var cek by remember {
+        mutableStateOf(false)
+    }
 
     Scaffold(backgroundColor = MaterialTheme.colors.primary) {
         Column(
@@ -54,7 +62,10 @@ fun LoginScreen(viewModel: ViewModelUser, viewModelState: ViewModelState) {
             Image(
                 painter = painterResource(id = R.drawable.img_tmdb),
                 contentDescription = "App Logo",
-                modifier = Modifier.weight(1f).width(185.dp).height(133.dp)
+                modifier = Modifier
+                    .weight(1f)
+                    .width(185.dp)
+                    .height(133.dp)
             )
             Card(
                 modifier = Modifier
@@ -119,46 +130,38 @@ fun LoginScreen(viewModel: ViewModelUser, viewModelState: ViewModelState) {
                         }
                     )
 
-                    Spacer(modifier = Modifier.height(10.dp))
-
                     ButtonMovieApp(text = "Log In") {
-                        val data = viewModel.getUserResponse
-                        if (data.isNotEmpty()) {
-                            val user = data[0]
-                            if (viewModelState.email == user.email) {
-                                if (password == user.password) {
-                                    viewModel.setEmail(user.id)
-                                    context.startActivity(
-                                        Intent(
-                                            context,
-                                            HomeActivity::class.java
-                                        )
-                                    )
-                                    context.act
-                                } else {
-                                    Toast.makeText(
-                                        context,
-                                        "Password Salah",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                }
+                        var user: GetUserResponseItem? = null
+                        for (data in listUser) {
+                            if (data.email == email) {
+                                cek = true
+                                user = data
+                                break
+                            }
+                        }
+
+                        if (cek) {
+                            if (password == user!!.password) {
+                                viewModel.setId(user.id)
                             } else {
                                 Toast.makeText(
                                     context,
-                                    "Akun belum terdaftar",
+                                    "Password Salah",
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }
                         } else {
                             Toast.makeText(context, "Akun belum terdaftar", Toast.LENGTH_SHORT)
                                 .show()
-
                         }
                     }
                     TextButtonMovieApp(
                         text = "Doesn't have account? Register",
                         modifier = Modifier.fillMaxWidth(),
-                        style = TextStyle(fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
+                        style = TextStyle(
+                            fontWeight = FontWeight.Bold,
+                            textAlign = TextAlign.Center
+                        )
                     ) {
                         context.startActivity(Intent(context, RegisterActivity::class.java))
                     }

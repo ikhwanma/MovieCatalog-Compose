@@ -1,8 +1,6 @@
 package ikhwan.binar.binarchallengedelapan.view.screen
 
 import android.content.Intent
-import android.util.Log
-import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
@@ -23,16 +21,16 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import ikhwan.binar.binarchallengedelapan.model.users.PostUserResponse
 import ikhwan.binar.binarchallengedelapan.view.LoginActivity
 import ikhwan.binar.binarchallengedelapan.view.component.ButtonMovieApp
 import ikhwan.binar.binarchallengedelapan.view.component.TextFieldsMovieApp
 import ikhwan.binar.binarchallengedelapan.view.ui.theme.MidnightBlue
 import ikhwan.binar.binarchallengedelapan.viewmodel.ViewModelState
+import ikhwan.binar.binarchallengedelapan.viewmodel.ViewModelUser
 
 @ExperimentalFoundationApi
 @Composable
-fun ProfileScreen(viewModelState: ViewModelState) {
+fun ProfileScreen(viewModelState: ViewModelState, viewModelUser: ViewModelUser) {
     val context = LocalContext.current
 
     val username = viewModelState.username
@@ -139,6 +137,7 @@ fun ProfileScreen(viewModelState: ViewModelState) {
             )
 
             ButtonMovieApp(text = "Update Data") {
+                viewModelUser.setId("")
                 context.startActivity(Intent(context, LoginActivity::class.java))
             }
         }

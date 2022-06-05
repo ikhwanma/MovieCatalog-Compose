@@ -1,18 +1,16 @@
 package ikhwan.binar.binarchallengedelapan.viewmodel
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ikhwan.binar.binarchallengedelapan.data.datastore.DataStoreManager
 import ikhwan.binar.binarchallengedelapan.data.utils.MainRepository
+import ikhwan.binar.binarchallengedelapan.data.utils.Resource
 import ikhwan.binar.binarchallengedelapan.model.users.GetUserResponseItem
 import ikhwan.binar.binarchallengedelapan.model.users.PostUserResponse
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,20 +22,20 @@ class ViewModelUser @Inject constructor(
 
     var getUserResponse: List<GetUserResponseItem> by mutableStateOf(listOf())
     var getUserIdResponse: List<GetUserResponseItem> by mutableStateOf(listOf())
-    var getEmailState: String by mutableStateOf("")
+    var getIdState: String by mutableStateOf("")
 
-    fun setEmail(email: String) {
+    fun setId(id: String) {
         viewModelScope.launch {
-            pref.setUser(email)
+            pref.setUser(id)
         }
     }
 
-    fun getEmail(): LiveData<String> {
+    fun getId(): LiveData<String> {
         return pref.getUser().asLiveData()
     }
 
-    fun setEmailState(email: String){
-        getEmailState = email
+    fun setIdState(id: String){
+        getIdState = id
     }
 
     fun getUser(email: String) {
@@ -46,12 +44,27 @@ class ViewModelUser @Inject constructor(
         }
     }
 
+    fun getAllUser() = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
+        try {
+            emit(Resource.success(mainRepository.getAllUser()))
+        } catch (e: Exception) {
+            emit(Resource.error(data = null, message = e.message ?: "Error Occured!"))
+        }
+    }
+
     fun getUserId(id: String) {
+        viewModelScope.launch {
+            getUserIdResponse = listOf(mainRepository.getUserId(id))
+        }
+    }
+
+    /*fun getUserId(id: String) {
         viewModelScope.launch {
             getUserIdResponse = listOf(mainRepository.getUserId(id))
             Log.d("userId", getUserIdResponse.toString())
         }
-    }
+    }*/
 
     fun registerUser(user: PostUserResponse) {
         viewModelScope.launch {

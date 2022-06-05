@@ -1,5 +1,7 @@
 package ikhwan.binar.binarchallengedelapan.data.networking
 
+import ikhwan.binar.binarchallengedelapan.model.credit.GetCreditResponse
+import ikhwan.binar.binarchallengedelapan.model.detailmovie.GetDetailMovieResponse
 import ikhwan.binar.binarchallengedelapan.model.nowplaying.GetNowPlayingResponse
 import ikhwan.binar.binarchallengedelapan.model.popularmovie.GetPopularMovieResponse
 import ikhwan.binar.binarchallengedelapan.model.users.GetUserResponseItem
@@ -18,12 +20,27 @@ interface ApiService {
         @Query("api_key") api_key: String
     ): GetNowPlayingResponse
 
+    @GET("/3/movie/{movie_id}")
+    suspend fun getDetailMovie(
+        @Path("movie_id") movieId: Int,
+        @Query("api_key") api_key: String
+    ): GetDetailMovieResponse
+
+    @GET("/3/movie/{movie_id}/credits")
+    suspend fun getCreditMovie(
+        @Path("movie_id") movieId: Int,
+        @Query("api_key") api_key: String
+    ): GetCreditResponse
+
     //=====================User========================
 
     @GET("/users")
     suspend fun getUser(
         @Query("email") email: String
     ) : List<GetUserResponseItem>
+
+    @GET("/users")
+    suspend fun getAllUser() : List<GetUserResponseItem>
 
     @GET("/users/{id}")
     suspend fun getUserId(

@@ -53,7 +53,12 @@ fun MovieItem(movie: Result) {
             modifier = Modifier
                 .fillMaxSize()
                 .clickable {
-                    context.startActivity(Intent(context, DetailActivity::class.java))
+                    context.startActivity(
+                        Intent(context, DetailActivity::class.java).putExtra(
+                            DetailActivity.INTENT_ID,
+                            movie.id
+                        )
+                    )
                 },
             shape = RoundedCornerShape(10.dp),
             elevation = 5.dp

@@ -4,7 +4,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocalMovies
 import androidx.compose.material.icons.filled.Movie
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Tv
 import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class BottomBarScreen(

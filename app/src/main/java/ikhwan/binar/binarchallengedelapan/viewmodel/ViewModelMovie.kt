@@ -1,34 +1,54 @@
 package ikhwan.binar.binarchallengedelapan.viewmodel
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.liveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ikhwan.binar.binarchallengedelapan.data.utils.MainRepository
-import ikhwan.binar.binarchallengedelapan.model.popularmovie.Result
-import kotlinx.coroutines.launch
+import ikhwan.binar.binarchallengedelapan.data.utils.Resource
+import kotlinx.coroutines.Dispatchers
+import java.lang.Exception
 import javax.inject.Inject
 
 
 @HiltViewModel
 class ViewModelMovie @Inject constructor(private val mainRepository: MainRepository) : ViewModel(){
 
-    var getPopularResponse: List<Result> by mutableStateOf(listOf())
-    var getNowPlayingResponse: List<Result> by mutableStateOf(listOf())
+    val apiKey = MutableLiveData<String>()
 
-    fun getPopularMovie(apiKey : String) {
-        viewModelScope.launch {
-            val listPopular = mainRepository.getPopularMovie(apiKey)
-            getPopularResponse = listPopular.results
+    fun getNowPlaying() = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
+        try {
+            emit(Resource.success(mainRepository.getNowPlayingMovie(apiKey.value!!)))
+        } catch (e: Exception) {
+            emit(Resource.error(data = null, message = e.message ?: "Error Occured!"))
         }
     }
 
-    fun getNowPlayingMovie(apiKey: String){
-        viewModelScope.launch {
-            val listMovie = mainRepository.getNowPlayingMovie(apiKey)
-            getNowPlayingResponse = listMovie.resultNows
+    fun getPopularMovie() = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
+        try {
+            emit(Resource.success(mainRepository.getPopularMovie(apiKey.value!!)))
+        } catch (e: Exception) {
+            emit(Resource.error(data = null, message = e.message ?: "Error Occured!"))
+        }
+    }
+
+    fun getDetailMovie(id: Int) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
+        try {
+            emit(Resource.success(mainRepository.getDetailMovie(id, apiKey.value!!)))
+        } catch (e: Exception) {
+            emit(Resource.error(data = null, message = e.message ?: "Error Occured!"))
+        }
+    }
+
+    fun getCreditMovie(id: Int) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
+        try {
+            emit(Resource.success(mainRepository.getCreditMovie(id, apiKey.value!!)))
+        } catch (e: Exception) {
+            emit(Resource.error(data = null, message = e.message ?: "Error Occured!"))
         }
     }
 }

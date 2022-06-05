@@ -8,8 +8,11 @@ class MainRepository @Inject constructor(private val apiHelper: ApiHelper) {
 
     suspend fun getPopularMovie(apiKey: String) = apiHelper.getPopularMovies(apiKey)
     suspend fun getNowPlayingMovie(apiKey: String) = apiHelper.getNowPlayingMovies(apiKey)
+    suspend fun getDetailMovie(id: Int, apiKey: String) = apiHelper.getDetailMovie(id, apiKey)
+    suspend fun getCreditMovie(id: Int, apiKey: String) = apiHelper.getCreditMovie(id, apiKey)
 
     suspend fun getUser(email : String) = apiHelper.getUser(email)
+    suspend fun getAllUser() = apiHelper.getAllUser()
     suspend fun getUserId(id: String) = apiHelper.getUserId(id)
     suspend fun addUsers(user: PostUserResponse) = apiHelper.addUsers(user)
 

@@ -8,9 +8,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class DataStoreManager(private val context: Context) {
-    suspend fun setUser(email : String){
+    suspend fun setUser(id : String){
         context.userDataStore.edit {
-            it[USER_KEY] = email
+            it[USER_KEY] = id
         }
     }
 

@@ -1,42 +1,35 @@
 package ikhwan.binar.binarchallengedelapan.view.screen
 
-import android.util.Log
-import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import ikhwan.binar.binarchallengedelapan.model.popularmovie.Result
 import ikhwan.binar.binarchallengedelapan.model.users.GetUserResponseItem
 import ikhwan.binar.binarchallengedelapan.view.navigationcompose.BottomBarScreen
 import ikhwan.binar.binarchallengedelapan.view.navigationcompose.BottomNavGraph
-import ikhwan.binar.binarchallengedelapan.viewmodel.ViewModelMovie
 import ikhwan.binar.binarchallengedelapan.viewmodel.ViewModelState
 import ikhwan.binar.binarchallengedelapan.viewmodel.ViewModelUser
 
 @ExperimentalFoundationApi
 @Composable
 fun HomeScreen(
-    viewModelMovie: ViewModelMovie,
+
     viewModelUser: ViewModelUser,
     viewModelState: ViewModelState,
-    apiKey: String,
-    emailState: String
+    listPopular: MutableList<Result>,
+    listNowPlaying: MutableList<Result>
 ) {
-    val context = LocalContext.current
-    val email = viewModelUser.getEmailState
 
-    viewModelMovie.getPopularMovie(apiKey)
-    viewModelMovie.getNowPlayingMovie(apiKey)
     var user = GetUserResponseItem("", "", "", "", "", "", "")
-    Log.d("userIdEmail", emailState)
+    val emailState = viewModelUser.getIdState
     if (emailState != ""){
         viewModelUser.getUserId(emailState)
         val users = viewModelUser.getUserIdResponse
@@ -45,31 +38,15 @@ fun HomeScreen(
         }
     }
 
-
-    /*viewModelUser.getUser(email)
-
-    for (data in viewModelUser.getUserResponse){
-        if (data.email == email){
-            user = data
-            break
-        }
-    }*/
-    /*viewModelUser.getUserId(email)
-    val users = viewModelUser.getUserIdResponse[0]
-    Toast.makeText(context, users.toString(), Toast.LENGTH_SHORT).show()*/
-
-
-    val listMovie = viewModelMovie.getPopularResponse
-    val listNowPlayingMovie = viewModelMovie.getNowPlayingResponse
-
     val navController = rememberNavController()
 
     BottomNavGraph(
         navController = navController,
-        listMovie = listMovie,
-        listNowPlaying = listNowPlayingMovie,
+        listMovie = listPopular,
+        listNowPlaying = listNowPlaying,
         name = user.username,
-        viewModelState = viewModelState
+        viewModelState = viewModelState,
+        viewModelUser = viewModelUser
     )
 
     Scaffold(
@@ -80,10 +57,11 @@ fun HomeScreen(
     ) {
         BottomNavGraph(
             navController = navController,
-            listMovie = listMovie,
-            listNowPlaying = listNowPlayingMovie,
+            listMovie = listPopular,
+            listNowPlaying = listNowPlaying,
             name = user.username,
-            viewModelState = viewModelState
+            viewModelState = viewModelState,
+            viewModelUser = viewModelUser
         )
     }
 }
