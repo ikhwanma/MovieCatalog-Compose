@@ -1,16 +1,15 @@
 package ikhwan.binar.binarchallengedelapan.view
 
 import android.annotation.SuppressLint
-import android.content.pm.ApplicationInfo
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.*
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
@@ -18,7 +17,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import ikhwan.binar.binarchallengedelapan.BuildConfig
 import ikhwan.binar.binarchallengedelapan.data.utils.Status.*
 import ikhwan.binar.binarchallengedelapan.model.popularmovie.Result
-import ikhwan.binar.binarchallengedelapan.model.users.GetUserResponseItem
 import ikhwan.binar.binarchallengedelapan.view.screen.HomeScreen
 import ikhwan.binar.binarchallengedelapan.view.ui.theme.BinarChallengeDelapanTheme
 import ikhwan.binar.binarchallengedelapan.viewmodel.ViewModelMovie
@@ -38,12 +36,8 @@ class HomeActivity : ComponentActivity() {
     private val viewModelState: ViewModelState by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val ai: ApplicationInfo = applicationContext.packageManager
-            .getApplicationInfo(
-                applicationContext.packageName,
-                PackageManager.GET_META_DATA
-            )
-        val apiKey = ai.metaData["apiKey"]
+
+        val apiKey = BuildConfig.TMDB_KEY
 
         super.onCreate(savedInstanceState)
         setContent {
@@ -57,7 +51,7 @@ class HomeActivity : ComponentActivity() {
                         viewModelUser.setIdState(it)
                     }
 
-                    viewModelMovie.apiKey.value = apiKey.toString()
+                    viewModelMovie.apiKey.value = apiKey
                     HomeScreen(viewModelUser, viewModelState, listPopular, listNowPlaying)
 
                 }

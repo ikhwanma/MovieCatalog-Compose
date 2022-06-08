@@ -2,14 +2,10 @@ package ikhwan.binar.binarchallengedelapan.view.screen
 
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.*
-import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.rememberScrollableState
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -32,7 +28,6 @@ import ikhwan.binar.binarchallengedelapan.model.credit.Cast
 import ikhwan.binar.binarchallengedelapan.model.detailmovie.GetDetailMovieResponse
 import ikhwan.binar.binarchallengedelapan.model.movieimage.Backdrop
 import ikhwan.binar.binarchallengedelapan.model.popularmovie.Result
-import ikhwan.binar.binarchallengedelapan.view.HomeActivity
 import ikhwan.binar.binarchallengedelapan.view.component.*
 import ikhwan.binar.binarchallengedelapan.view.ui.theme.BottomOnlyCorner
 import ikhwan.binar.binarchallengedelapan.view.ui.theme.MidnightBlueVariant

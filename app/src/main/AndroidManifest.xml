@@ -42,10 +42,6 @@
             </intent-filter>
         </activity>
 
-        <meta-data
-            android:name="apiKey"
-            android:value="${tmdbKeys}" />
-
     </application>
 
 </manifest>
