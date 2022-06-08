@@ -100,4 +100,5 @@ dependencies {
 
 secrets {
     defaultPropertiesFileName = 'secrets.defaults.properties'
+
 }
