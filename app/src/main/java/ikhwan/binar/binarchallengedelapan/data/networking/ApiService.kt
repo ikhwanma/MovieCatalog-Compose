@@ -2,6 +2,7 @@ package ikhwan.binar.binarchallengedelapan.data.networking
 
 import ikhwan.binar.binarchallengedelapan.model.credit.GetCreditResponse
 import ikhwan.binar.binarchallengedelapan.model.detailmovie.GetDetailMovieResponse
+import ikhwan.binar.binarchallengedelapan.model.movieimage.GetMovieImageResponse
 import ikhwan.binar.binarchallengedelapan.model.nowplaying.GetNowPlayingResponse
 import ikhwan.binar.binarchallengedelapan.model.popularmovie.GetPopularMovieResponse
 import ikhwan.binar.binarchallengedelapan.model.users.GetUserResponseItem
@@ -31,6 +32,18 @@ interface ApiService {
         @Path("movie_id") movieId: Int,
         @Query("api_key") api_key: String
     ): GetCreditResponse
+
+    @GET("/3/movie/{movie_id}/images")
+    suspend fun getImageMovie(
+        @Path("movie_id") movieId: Int,
+        @Query("api_key") api_key: String
+    ): GetMovieImageResponse
+
+    @GET("/3/movie/{movie_id}/similar")
+    suspend fun getSimilarMovie(
+        @Path("movie_id") movieId: Int,
+        @Query("api_key") api_key: String
+    ): GetPopularMovieResponse
 
     //=====================User========================
 

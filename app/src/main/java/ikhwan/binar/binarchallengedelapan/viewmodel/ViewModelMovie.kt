@@ -51,4 +51,22 @@ class ViewModelMovie @Inject constructor(private val mainRepository: MainReposit
             emit(Resource.error(data = null, message = e.message ?: "Error Occured!"))
         }
     }
+
+    fun getSimilarMovie(id: Int) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
+        try {
+            emit(Resource.success(mainRepository.getSimilarMovie(id, apiKey.value!!)))
+        } catch (e: Exception) {
+            emit(Resource.error(data = null, message = e.message ?: "Error Occured!"))
+        }
+    }
+
+    fun getImageMovie(id: Int) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
+        try {
+            emit(Resource.success(mainRepository.getImageMovie(id, apiKey.value!!)))
+        } catch (e: Exception) {
+            emit(Resource.error(data = null, message = e.message ?: "Error Occured!"))
+        }
+    }
 }

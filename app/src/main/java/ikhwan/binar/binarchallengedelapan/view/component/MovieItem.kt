@@ -1,6 +1,7 @@
 package ikhwan.binar.binarchallengedelapan.view.component
 
 import android.content.Intent
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -22,6 +23,7 @@ import ikhwan.binar.binarchallengedelapan.view.ui.theme.*
 import ikhwan.binar.binarchallengedelapan.model.popularmovie.Result
 import ikhwan.binar.binarchallengedelapan.view.DetailActivity
 
+@ExperimentalFoundationApi
 @Composable
 fun MovieItem(movie: Result) {
     val context = LocalContext.current

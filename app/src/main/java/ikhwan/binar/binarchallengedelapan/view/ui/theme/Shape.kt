@@ -16,3 +16,10 @@ val TopOnlyCorner = Shapes(
         topEnd = 30.dp
     )
 )
+
+val BottomOnlyCorner = Shapes(
+    medium = RoundedCornerShape(
+        bottomStart = 30.dp,
+        bottomEnd = 30.dp
+    )
+)

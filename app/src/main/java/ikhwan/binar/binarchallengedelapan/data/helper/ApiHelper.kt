@@ -13,6 +13,10 @@ class ApiHelper @Inject constructor(
     suspend fun getNowPlayingMovies(apiKey: String) = apiServiceMovie.getNowPlayingMovie(apiKey)
     suspend fun getDetailMovie(id: Int, apiKey: String) = apiServiceMovie.getDetailMovie(id, apiKey)
     suspend fun getCreditMovie(id: Int, apiKey: String) = apiServiceMovie.getCreditMovie(id, apiKey)
+    suspend fun getSimilarMovie(id: Int, apiKey: String) =
+        apiServiceMovie.getSimilarMovie(id, apiKey)
+    suspend fun getImageMovie(id: Int, apiKey: String) =
+        apiServiceMovie.getImageMovie(id, apiKey)
 
     suspend fun getUser(email: String) = apiServiceUser.getUser(email)
     suspend fun getAllUser() = apiServiceUser.getAllUser()
