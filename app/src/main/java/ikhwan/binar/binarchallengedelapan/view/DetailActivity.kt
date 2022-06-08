@@ -1,6 +1,8 @@
 package ikhwan.binar.binarchallengedelapan.view
 
 import android.annotation.SuppressLint
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -39,8 +41,14 @@ class DetailActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val apiKey = BuildConfig.TMDB_KEY
-        viewModelMovie.apiKey.value = apiKey
+        val ai: ApplicationInfo = applicationContext.packageManager
+            .getApplicationInfo(
+                applicationContext.packageName,
+                PackageManager.GET_META_DATA
+            )
+        val apiKey = ai.metaData["apiKey"]
+
+        viewModelMovie.apiKey.value = apiKey.toString()
         val id = intent.getIntExtra(INTENT_ID, 0)
         Log.d("iniListDetails", id.toString())
         viewModelMovie.getDetailMovie(id).observe(this){

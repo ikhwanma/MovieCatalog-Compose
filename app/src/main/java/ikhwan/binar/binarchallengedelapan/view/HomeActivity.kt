@@ -1,6 +1,8 @@
 package ikhwan.binar.binarchallengedelapan.view
 
 import android.annotation.SuppressLint
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -36,6 +38,13 @@ class HomeActivity : ComponentActivity() {
     private val viewModelState: ViewModelState by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val ai: ApplicationInfo = applicationContext.packageManager
+            .getApplicationInfo(
+                applicationContext.packageName,
+                PackageManager.GET_META_DATA
+            )
+        val apiKey = ai.metaData["apiKey"]
+
         super.onCreate(savedInstanceState)
         setContent {
             BinarChallengeDelapanTheme {
@@ -43,13 +52,12 @@ class HomeActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    val apiKey = BuildConfig.TMDB_KEY
 
                     viewModelUser.getId().observe(this) {
                         viewModelUser.setIdState(it)
                     }
 
-                    viewModelMovie.apiKey.value = apiKey
+                    viewModelMovie.apiKey.value = apiKey.toString()
                     HomeScreen(viewModelUser, viewModelState, listPopular, listNowPlaying)
 
                 }
