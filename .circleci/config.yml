@@ -35,6 +35,4 @@ jobs:
       - store_artifacts:  
           path: app/build/outputs/apk/debug/
           destination: artifact-file
-checkout:
-  post:
-    - cp local.properties.ci local.properties
+
