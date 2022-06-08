@@ -99,5 +99,10 @@ dependencies {
 }
 
 secrets {
+    propertiesFileName 'secrets.properties'
+
     defaultPropertiesFileName = 'secrets.defaults.properties'
+
+    ignoreList.add("TMDB_KEY")
+    ignoreList.add("sdk.*")
 }
