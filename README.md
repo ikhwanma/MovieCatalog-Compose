@@ -9,9 +9,9 @@ Using TMDB API for list and detail movie, and using mockApi.io for Login and Reg
 - Open project : local.properties
 - Add this code : 
 ```
- TheMovieDBApi = YOUR_KEY
+ TMDB_KEY = YOUR_KEY
 ```
 For example :  
 ```
- TheMovieDBApi = 6dshjakdhau8291h
+ TMDB_KEY = 6dshjakdhau8291h
 ```
