@@ -130,6 +130,8 @@ fun LoginScreen(
                         }
                     )
 
+                    Spacer(modifier = Modifier.height(10.dp))
+
                     ButtonMovieApp(text = "Log In") {
                         var user: GetUserResponseItem? = null
                         for (data in listUser) {

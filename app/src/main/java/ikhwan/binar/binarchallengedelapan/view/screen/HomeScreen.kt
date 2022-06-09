@@ -15,7 +15,6 @@ import ikhwan.binar.binarchallengedelapan.model.popularmovie.Result
 import ikhwan.binar.binarchallengedelapan.model.users.GetUserResponseItem
 import ikhwan.binar.binarchallengedelapan.view.navigationcompose.BottomBarScreen
 import ikhwan.binar.binarchallengedelapan.view.navigationcompose.BottomNavGraph
-import ikhwan.binar.binarchallengedelapan.viewmodel.ViewModelState
 import ikhwan.binar.binarchallengedelapan.viewmodel.ViewModelUser
 
 @ExperimentalFoundationApi
@@ -23,7 +22,6 @@ import ikhwan.binar.binarchallengedelapan.viewmodel.ViewModelUser
 fun HomeScreen(
 
     viewModelUser: ViewModelUser,
-    viewModelState: ViewModelState,
     listPopular: MutableList<Result>,
     listNowPlaying: MutableList<Result>
 ) {
@@ -45,7 +43,6 @@ fun HomeScreen(
         listMovie = listPopular,
         listNowPlaying = listNowPlaying,
         name = user.username,
-        viewModelState = viewModelState,
         viewModelUser = viewModelUser
     )
 
@@ -60,7 +57,6 @@ fun HomeScreen(
             listMovie = listPopular,
             listNowPlaying = listNowPlaying,
             name = user.username,
-            viewModelState = viewModelState,
             viewModelUser = viewModelUser
         )
     }
@@ -71,7 +67,6 @@ fun BottomBar(navController: NavHostController) {
     val screens = listOf(
         BottomBarScreen.Popular,
         BottomBarScreen.NowPlaying,
-        BottomBarScreen.Profile,
     )
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination

@@ -20,7 +20,6 @@ import ikhwan.binar.binarchallengedelapan.model.popularmovie.Result
 import ikhwan.binar.binarchallengedelapan.view.screen.HomeScreen
 import ikhwan.binar.binarchallengedelapan.view.ui.theme.BinarChallengeDelapanTheme
 import ikhwan.binar.binarchallengedelapan.viewmodel.ViewModelMovie
-import ikhwan.binar.binarchallengedelapan.viewmodel.ViewModelState
 import ikhwan.binar.binarchallengedelapan.viewmodel.ViewModelUser
 
 @SuppressLint("MutableCollectionMutableState")
@@ -33,7 +32,6 @@ class HomeActivity : ComponentActivity() {
 
     private val viewModelMovie: ViewModelMovie by viewModels()
     private val viewModelUser: ViewModelUser by viewModels()
-    private val viewModelState: ViewModelState by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -52,7 +50,7 @@ class HomeActivity : ComponentActivity() {
                     }
 
                     viewModelMovie.apiKey.value = apiKey
-                    HomeScreen(viewModelUser, viewModelState, listPopular, listNowPlaying)
+                    HomeScreen(viewModelUser, listPopular, listNowPlaying)
 
                 }
             }
