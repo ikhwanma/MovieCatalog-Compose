@@ -67,7 +67,7 @@ fun NowPlaying(listMovie: List<Result>, name: String, viewModelUser: ViewModelUs
                 }
             }
         }
-        
+
         Spacer(modifier = Modifier.height(20.dp))
 
         Card(

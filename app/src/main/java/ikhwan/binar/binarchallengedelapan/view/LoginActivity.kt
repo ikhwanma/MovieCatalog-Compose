@@ -14,10 +14,12 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import dagger.hilt.android.AndroidEntryPoint
 import ikhwan.binar.binarchallengedelapan.data.utils.Status.*
 import ikhwan.binar.binarchallengedelapan.model.users.GetUserResponseItem
 import ikhwan.binar.binarchallengedelapan.view.screen.LoginScreen
+import ikhwan.binar.binarchallengedelapan.view.screen.WaitingScreen
 import ikhwan.binar.binarchallengedelapan.view.ui.theme.BinarChallengeDelapanTheme
 import ikhwan.binar.binarchallengedelapan.viewmodel.ViewModelState
 import ikhwan.binar.binarchallengedelapan.viewmodel.ViewModelUser
@@ -35,12 +37,29 @@ class LoginActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModelUser.getId().observe(this@LoginActivity) {
-            if (it != "") {
-                startActivity(Intent(this, HomeActivity::class.java))
+        setContent {
+            BinarChallengeDelapanTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colors.background,
+                ) {
+                    WaitingScreen()
+                }
             }
         }
 
+        installSplashScreen()
+
+        viewModelUser.getId().observe(this@LoginActivity) {
+            if (it != "") {
+                startActivity(Intent(this, HomeActivity::class.java))
+            }else{
+                setUi()
+            }
+        }
+    }
+
+    private fun setUi() {
         setContent {
             BinarChallengeDelapanTheme {
                 Surface(
@@ -53,7 +72,6 @@ class LoginActivity : ComponentActivity() {
         }
 
         getAllUser()
-
     }
 
     private fun getAllUser() {
