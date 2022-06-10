@@ -73,7 +73,10 @@ fun RegisterScreen(viewModelUser: ViewModelUser, viewModelState: ViewModelState)
             Image(
                 painter = painterResource(id = R.drawable.img_tmdb),
                 contentDescription = "App Logo",
-                modifier = Modifier.weight(1f).width(185.dp).height(133.dp)
+                modifier = Modifier
+                    .weight(1f)
+                    .width(185.dp)
+                    .height(133.dp)
             )
             Card(
                 modifier = Modifier
@@ -223,6 +226,7 @@ fun RegisterScreen(viewModelUser: ViewModelUser, viewModelState: ViewModelState)
                                 val user = PostUserResponse("", "", email, "", password, username)
 
                                 viewModelUser.registerUser(user)
+                                Toast.makeText(context, "Register Successful", Toast.LENGTH_SHORT).show()
                                 context.startActivity(Intent(context, LoginActivity::class.java))
                             }else{
                                 Toast.makeText(context, "Email has used by another user", Toast.LENGTH_SHORT).show()

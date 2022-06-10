@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BinarChallengeDelapan</string>
+    <string name="app_name">Movie Catalog</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_activity_register">RegisterActivity</string>
     <string name="title_activity_deetail">DeetailActivity</string>

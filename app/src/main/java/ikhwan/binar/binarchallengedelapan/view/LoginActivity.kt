@@ -8,8 +8,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
@@ -33,6 +34,13 @@ class LoginActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        viewModelUser.getId().observe(this@LoginActivity) {
+            if (it != "") {
+                startActivity(Intent(this, HomeActivity::class.java))
+            }
+        }
+
         setContent {
             BinarChallengeDelapanTheme {
                 Surface(
@@ -44,19 +52,13 @@ class LoginActivity : ComponentActivity() {
             }
         }
 
-        viewModelUser.getId().observe(this){
-            if (it != ""){
-                startActivity(Intent(this, HomeActivity::class.java))
-                finish()
-            }
-        }
-
         getAllUser()
+
     }
 
     private fun getAllUser() {
-        viewModelUser.getAllUser().observe(this){
-            when(it.status){
+        viewModelUser.getAllUser().observe(this) {
+            when (it.status) {
                 SUCCESS -> {
                     listUser.clear()
                     listUser.addAll(it.data!!)
