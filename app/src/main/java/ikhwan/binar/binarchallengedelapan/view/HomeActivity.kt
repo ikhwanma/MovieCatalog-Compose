@@ -47,6 +47,9 @@ class HomeActivity : ComponentActivity() {
 
                     viewModelUser.getId().observe(this) {
                         viewModelUser.setIdState(it)
+                        if (it == ""){
+                            finish()
+                        }
                     }
 
                     viewModelMovie.apiKey.value = apiKey
@@ -55,6 +58,7 @@ class HomeActivity : ComponentActivity() {
                 }
             }
         }
+
 
         getPopular()
         getNowPlaying()

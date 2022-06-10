@@ -53,6 +53,7 @@ class LoginActivity : ComponentActivity() {
         viewModelUser.getId().observe(this@LoginActivity) {
             if (it != "") {
                 startActivity(Intent(this, HomeActivity::class.java))
+                finish()
             }else{
                 setUi()
             }

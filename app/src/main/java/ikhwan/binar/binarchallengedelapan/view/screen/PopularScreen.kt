@@ -1,5 +1,6 @@
 package ikhwan.binar.binarchallengedelapan.view.screen
 
+import android.app.AlertDialog
 import android.content.Intent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
@@ -54,8 +55,16 @@ fun PopularScreen(listMovie: List<Result>, name: String, viewModelUser: ViewMode
 
                 IconButton(
                     onClick = {
-                        viewModelUser.setId("")
-                        context.startActivity(Intent(context, LoginActivity::class.java))
+                        AlertDialog.Builder(context).setTitle("Logout")
+                            .setMessage("Are you sure?")
+                            .setIcon(ikhwan.binar.binarchallengedelapan.R.mipmap.ic_launcher)
+                            .setPositiveButton("Yes") { _, _ ->
+                                viewModelUser.setId("")
+                                context.startActivity(Intent(context, LoginActivity::class.java))
+                            }.setNegativeButton("No") { _, _ ->
+
+                            }
+                            .show()
                     }) {
                     Icon(
                         Icons.Filled.Logout,
