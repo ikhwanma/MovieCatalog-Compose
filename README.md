@@ -1,5 +1,5 @@
-# BinarChallengeDelapan
-Using TMDB API for list and detail movie, and using mockApi.io for Login and RegisterUser
+# Movie Catalog (Using Jetpack Compose)
+This project is made to fulfill binar academy bootcamp challenge chapter 8, using jetpack compose as a layout, using TMDB API for list and detail movie, and using mockApi.io for Login and RegisterUser
 
 ## WARNING!!
 - Don't use your personal data when register an account, because the API is public
